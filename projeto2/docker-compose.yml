@@ -1,0 +1,24 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "3000:3000"
+
+  banco-dados:
+    build:
+      context: ./banco-dados
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: nome_do_banco
+      MYSQL_USER: nome_do_usuario
+      MYSQL_PASSWORD: senha_do_usuario
+
+  aplicacao-web:
+    build:
+      context: ./aplicacao-web
+    ports:
+      - "80:80"
+    depends_on:
+      - api
